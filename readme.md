@@ -21,7 +21,7 @@ Wishlist
 ![Wishlist shortcode](https://i.imgur.com/YBveh8H.png)
 
 Responsive Wishlist
-![Wishlist shortcode](https://i.imgur.com/IfrJcX6.png)
+![Responsive Wishlist](https://i.imgur.com/IfrJcX6.png)
 
 Plugin Settings
 ![Plugin Settings](https://i.imgur.com/8j1VI7O.png)

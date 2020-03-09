@@ -1,0 +1,101 @@
+/* Hide page title of shortcode page. */
+#main .entry-title {
+    display: none;
+}
+/* However, do not hide title of wc account page as we are using shortcode there too. */
+.woocommerce-account #main .entry-title {
+    display: inherit !important;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl {
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+    font-size: 0.8rem;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .mobile-th {
+    background: #eee;
+    color: dimgrey;
+    display: none;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .product-thumbnail img {
+    max-width: 50px;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .price-increase {
+    font-size: 0.75rem;
+    color: #bb5e5e;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .price-decrease {
+    font-size: 0.75rem;
+    color: #306f35;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .product-actions .date-added {
+    display: block;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .product-actions .add_to_cart_inline {
+    display: inline-block;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .product-actions .add_to_cart_inline a {
+    padding: 0.5em 2em;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .product-actions .remove-from-wishlist {
+    margin-left: 5px;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .product-actions .woocommerce-message {
+    display: none !important;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .mobile-display {
+    display: none;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .no-data-found-row td {
+    text-align: center;
+}
+#wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .no-data-found-row.hide {
+    display: none;
+}
+/* Hide wishlist shortcode title on wc my account page */
+.woocommerce-MyAccount-content #wlffwc-wishlist-wrapper h2 {
+    display: none;
+}
+/* Simple CSS for flexbox table on mobile */
+@media(max-width: 800px) {
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl thead {
+        left: -9999px;
+        position: absolute;
+        visibility: hidden;
+    }
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl tr {
+        border-bottom: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl td {
+        border: 1px solid #ccc;
+        margin: 0 -1px -1px 0;
+        padding-top: 35px;
+        padding-bottom: 0.875em;
+        position: relative;
+        width: 50%;
+        text-align: center;
+    }
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .no-data-found-row td {
+        padding-top: 0.875em;
+        border: none;
+    }
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .mobile-th {
+        display: block;
+    }
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .mobile-display {
+        display: inherit;
+    }
+    #wlffwc-wishlist-wrapper .wlffwc-wishlist-tbl .not-mobile-display {
+        display: none;
+    }
+}

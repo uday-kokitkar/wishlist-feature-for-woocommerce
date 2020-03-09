@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Wishlist Feature For WooCommerce\n"
+"POT-Creation-Date: 2020-03-09 16:06+0530\n"
+"PO-Revision-Date: 2020-03-09 16:06+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.3\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;esc_html_e;esc_html__\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+
+#: includes/admin/class-wlffwc-admin-plugins-links.php:62
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-wlffwc-admin-settings.php:103
+msgid "-- Select --"
+msgstr ""
+
+#: includes/class-wishlist-feature-for-woocommerce.php:68
+msgid "Cloning is forbidden."
+msgstr ""
+
+#: includes/class-wishlist-feature-for-woocommerce.php:75
+msgid "Unserializing instances of this class is forbidden."
+msgstr ""
+
+#: includes/class-wishlist-feature-for-woocommerce.php:231
+#, php-format
+msgid ""
+"The <strong>%1$s</strong> requires PHP version %2$s or higher. Because you "
+"are using an unsupported version of PHP (%3$s), the <strong>%4$s</strong> "
+"plugin will not initialize. Please contact your hosting company to upgrade "
+"to PHP."
+msgstr ""
+
+#: includes/class-wishlist-feature-for-woocommerce.php:252
+#, php-format
+msgid ""
+"The <strong>%1$s</strong> requires WooCommerce to be activated ! <a href="
+"\"%2$s\">Install / Activate WooCommerce</a>"
+msgstr ""
+
+#: includes/class-wlffwc-helper.php:38
+msgid "wishlist"
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:95
+msgid "View cart"
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:95
+msgid "A product has been added to your cart."
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:134
+#: includes/class-wlffwc-wishlist-handler.php:149
+msgid "My wishlist"
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:154
+msgid "Wishlist data is not valid."
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:200
+#: includes/class-wlffwc-wishlist-handler.php:317
+msgid "Something went wrong. Please refresh a page and try again."
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:222
+#: includes/class-wlffwc-wishlist-handler.php:337
+msgid "Can not process the request for non logged users."
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:253
+#, php-format
+msgid "A product is successfully added! <a href=\"%1$s\">Browse %2$s</a>"
+msgstr ""
+
+#: includes/class-wlffwc-wishlist-handler.php:360
+msgid "A product is removed!"
+msgstr ""
+
+#: includes/public/class-wlffwc-public-single-product.php:82
+msgid "Browse"
+msgstr ""
+
+#: includes/public/class-wlffwc-public-single-product.php:84
+msgid "This product is already in your"
+msgstr ""
+
+#: includes/public/class-wlffwc-public-single-product.php:97
+msgid "Add to"
+msgstr ""
+
+#: includes/shortcodes/class-wlffwc-shortcode-wishlist.php:116
+msgid "of"
+msgstr ""
+
+#: includes/shortcodes/class-wlffwc-shortcode-wishlist.php:118
+msgid "No products added to the"
+msgstr ""
+
+#: includes/templates/admin/wlffwc-global-settings.template.php:22
+msgid "Wishlist Feature for WooCommerce"
+msgstr ""
+
+#: includes/templates/admin/wlffwc-global-settings.template.php:28
+msgid "Wishlist text"
+msgstr ""
+
+#: includes/templates/admin/wlffwc-global-settings.template.php:39
+msgid ""
+"A \"wishlist\" text. Changing this text will take effect on frontend only."
+msgstr ""
+
+#: includes/templates/admin/wlffwc-global-settings.template.php:45
+msgid "Wishlist page"
+msgstr ""
+
+#: includes/templates/admin/wlffwc-global-settings.template.php:59
+msgid "A page with [wlffwc_wishlist] shortcode inserted."
+msgstr ""
+
+#: includes/templates/admin/wlffwc-global-settings.template.php:66
+msgid "Save changes"
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:28
+#: includes/templates/public/wlffwc-wishlist.template.php:48
+msgid "Product"
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:29
+#: includes/templates/public/wlffwc-wishlist.template.php:60
+msgid "Unit Price"
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:30
+#: includes/templates/public/wlffwc-wishlist.template.php:73
+msgid "Stock Status"
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:31
+#: includes/templates/public/wlffwc-wishlist.template.php:78
+msgid "Actions"
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:64
+#, php-format
+msgid "Price increased by %s%% since added."
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:67
+#, php-format
+msgid "Price dropped by %s%% since added."
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:80
+#, php-format
+msgid "Added on: %s"
+msgstr ""
+
+#: includes/templates/public/wlffwc-wishlist.template.php:85
+msgid "Remove"
+msgstr ""

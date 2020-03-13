@@ -89,19 +89,19 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 			return apply_filters(
 				'wlffwc_localize_wishlist',
 				array(
-					'ajax_url' => admin_url( 'admin-ajax.php', 'relative' ),
-					'ajax_loader' => WLFFWC_PLUGIN_URL . 'assets/images/ajax-loader.svg',
-					'labels' => array(
+					'ajax_url'            => admin_url( 'admin-ajax.php', 'relative' ),
+					'ajax_loader'         => WLFFWC_PLUGIN_URL . 'assets/images/ajax-loader.svg',
+					'labels'              => array(
 						'added_to_cart_message' => sprintf( '<div class="woocommerce-message" role="alert"><a href="%s" class="button wc-forward">%s</a> %s</div>', esc_url( wc_get_cart_url() ), __( 'View cart', 'wishlist-feature-for-woocommerce' ), __( 'A product has been added to your cart.', 'wishlist-feature-for-woocommerce' ) ),
 					),
-					'wlffwc_add_nonce' => wp_create_nonce( 'wlffwc-add-ajax-' . get_current_user_id() ),
+					'wlffwc_add_nonce'    => wp_create_nonce( 'wlffwc-add-ajax-' . get_current_user_id() ),
 					'wlffwc_remove_nonce' => wp_create_nonce( 'wlffwc-remove-ajax-' . get_current_user_id() ),
-					'actions' => array(
-						'add_to_wishlist_action' => 'wlffwc_add_to_wishlist',
+					'actions'             => array(
+						'add_to_wishlist_action'      => 'wlffwc_add_to_wishlist',
 						'remove_from_wishlist_action' => 'wlffwc_remove_from_wishlist',
 					),
-					'plugin_settings' => array(
-						'browse_url' => get_permalink( $plugin_settings['wlffwc_wishlist_page'] ),
+					'plugin_settings'     => array(
+						'browse_url'          => get_permalink( $plugin_settings['wlffwc_wishlist_page'] ),
 						'wishlist_alt_string' => $plugin_settings['wlffwc_wishlist_text'],
 					),
 				)
@@ -116,7 +116,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		 * @since  1.0.0
 		 * @return int Wishlist ID. Returns an existing one or newly created.
 		 */
-		private function create_wishlist( int $user_id = 0 ) {
+		private function create_wishlist( $user_id = 0 ) {
 
 			if ( 0 === $user_id ) {
 				$user_id = get_current_user_id();
@@ -148,7 +148,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 
 			$default_data['wishlist_name'] = ( ! empty( $default_data['wishlist_name'] ) ) ? strip_tags( $default_data['wishlist_name'] ) : __( 'My wishlist', 'wishlist-feature-for-woocommerce' );
 
-			$default_data['privacy'] = ( in_array( $default_data['privacy'], array( 0, 1 ) ) ) ? $default_data['privacy'] : 0;
+			$default_data['privacy'] = ( in_array( $default_data['privacy'], array( 0, 1 ), true ) ) ? $default_data['privacy'] : 0;
 
 			if ( $error_in_data ) {
 				return new WP_Error( 'wlffwc', __( 'Wishlist data is not valid.', 'wishlist-feature-for-woocommerce' ) );
@@ -194,7 +194,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		 */
 		public function add( $atts = array() ) {
 
-			$row_id = 0;
+			$row_id        = 0;
 			$ajax_response = array(
 				'success' => false,
 				'message' => __( 'Something went wrong. Please refresh a page and try again.', 'wishlist-feature-for-woocommerce' ),
@@ -249,6 +249,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 
 					$ajax_response['success'] = true;
 					$ajax_response['message'] = sprintf(
+						/* translators: Plugin settings page, wishlist text */
 						__(
 							'A product is successfully added! <a href="%1$s">Browse %2$s</a>'
 						),
@@ -276,7 +277,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		 *
 		 * @return int Row ID.
 		 */
-		private function add_product_to_wishlist( WC_Product $product, int $wishlist_id ) {
+		private function add_product_to_wishlist( WC_Product $product, $wishlist_id ) {
 
 			global $wpdb;
 
@@ -305,13 +306,14 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		/**
 		 * Remove an entry from the wishlist.
 		 *
-		 * @param array $atts Array of parameters; when not passed, parameters will be retrieved from $_REQUEST.
+		 * @param array   $atts    Array of parameters; when not passed, parameters will be retrieved from $_REQUEST.
+		 * @param boolean $is_ajax To check if this is the ajax request. Default is true.
 		 *
 		 * @since 1.0.0
 		 * @return boolean True if removed.
 		 */
-		public function remove( $atts = array() ) {
-			$row_id = 0;
+		public function remove( $atts = array(), $is_ajax = true ) {
+			$row_id        = 0;
 			$ajax_response = array(
 				'success' => false,
 				'message' => __( 'Something went wrong. Please refresh a page and try again.', 'wishlist-feature-for-woocommerce' ),
@@ -330,7 +332,11 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 			}
 
 			if ( empty( $atts ) ) {
-				wp_send_json_error();
+				if ( $is_ajax ) {
+					wp_send_json_error();
+				} else {
+					return $ajax_response;
+				}
 			}
 
 			if ( ! get_current_user_id() ) {
@@ -362,7 +368,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 			}
 
 			// Response to ajax request.
-			if ( ! empty( $_POST ) ) {
+			if ( $is_ajax ) {
 				wp_send_json(
 					$ajax_response
 				);
@@ -378,13 +384,13 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		 * @param  int $wishlist_id Wishlist to be updated.
 		 * @return boolean             True on success.
 		 */
-		private function remove_product_from_wishlist( int $product_id, int $wishlist_id ) {
+		private function remove_product_from_wishlist( $product_id, $wishlist_id ) {
 			global $wpdb;
 
 			$res = $wpdb->delete(
 				$wpdb->prefix . 'wlffwc_list_details',
 				array(
-					'product_id' => $product_id,
+					'product_id'  => $product_id,
 					'wishlist_id' => $wishlist_id,
 				)
 			);
@@ -408,8 +414,8 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 				$product_id = sanitize_text_field( wp_unslash( $_REQUEST['wlffwc_remove_after_adding_cart'] ) );
 
 				// To confirm that we are going to remove the product that is added in the cart.
-				if ( isset( $_REQUEST['product_id'] ) && $product_id == $_REQUEST['product_id'] ) {
-					$this->remove( array( 'product_id' => $product_id ) );
+				if ( isset( $_REQUEST['product_id'] ) && $product_id === $_REQUEST['product_id'] ) {
+					$this->remove( array( 'product_id' => $product_id ), false );
 				}
 			}
 		}
@@ -422,7 +428,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		 * @param  int $user_id User ID.
 		 * @return int          Wishlist ID from the database, empty if not found.
 		 */
-		public function get_wishlist_id( int $user_id = 0 ) {
+		public function get_wishlist_id( $user_id = 0 ) {
 			if ( 0 === $user_id ) {
 				return 0;
 			}
@@ -451,7 +457,7 @@ if ( ! class_exists( 'WLFFWC_Wishlist_Handler' ) ) {
 		 *
 		 * @return bool
 		 */
-		public function is_product_in_wishlist( int $product_id, int $user_id, int $wishlist_id = 0 ) {
+		public function is_product_in_wishlist( $product_id, $user_id, $wishlist_id = 0 ) {
 
 			$response = false;
 

@@ -29,13 +29,13 @@ defined( 'ABSPATH' ) || exit;
 					</th>
 					<td class="forminp forminp-text">
 						<input 
-						   name = "wlffwc_wishlist_text"
-						   id = "wlffwc_wishlist_text"
-						   type = "text"
-						   value = "<?php echo esc_attr( wp_unslash( $global_settings['wlffwc_wishlist_text'] ) ); ?>"
-						   class = ""
-						   placeholder = "<?php echo esc_attr( wp_unslash( $default_settings['wlffwc_wishlist_text'] ) ); ?>"
-						  />
+						name = "wlffwc_wishlist_text"
+						id = "wlffwc_wishlist_text"
+						type = "text"
+						value = "<?php echo esc_attr( wp_unslash( $global_settings['wlffwc_wishlist_text'] ) ); ?>"
+						class = ""
+						placeholder = "<?php echo esc_attr( wp_unslash( $default_settings['wlffwc_wishlist_text'] ) ); ?>"
+						/>
 						<p class="description"><?php esc_html_e( 'A "wishlist" text. Changing this text will take effect on frontend only.', 'wishlist-feature-for-woocommerce' ); ?></p>
 					</td>
 				</tr>
@@ -49,10 +49,18 @@ defined( 'ABSPATH' ) || exit;
 							<?php
 							foreach ( $wp_pages as $w_page ) {
 								$sel = '';
-								if ( $w_page->ID == $global_settings['wlffwc_wishlist_page'] ) {
+								if ( $w_page->ID === $global_settings['wlffwc_wishlist_page'] ) {
 									$sel = ' selected="selected"';
 								}
-								echo '<option value="' . esc_attr( $w_page->ID ) . '"' . $sel . '>' . esc_html( $w_page->post_title ) . '</option>';
+								echo wp_kses(
+									'<option value="' . esc_attr( $w_page->ID ) . '"' . $sel . '>' . esc_html( $w_page->post_title ) . '</option>',
+									array(
+										'option' => array(
+											'value'    => array(),
+											'selected' => array(),
+										),
+									)
+								);
 							}
 							?>
 						</select>

@@ -61,22 +61,39 @@ defined( 'ABSPATH' ) || exit;
 							<?php echo wc_price( wc_get_price_to_display( $w_item['product_object'] ) ); ?>
 							<br />
 							<?php if ( $w_item['product_object']->get_price() > $w_item['price'] ) : ?>
-							<span class="price-increase"><?php printf( __( 'Price increased by %s%% since added.' ), round( ( ( $w_item['product_object']->get_price() - $w_item['price'] ) / $w_item['price'] ) * 100 ) ); ?></span>
+							<span class="price-increase">
+								<?php
+								printf(
+									/* translators: Price change in % */
+									__( 'Price increased by %s%% since added.' ),
+									round( ( ( $w_item['product_object']->get_price() - $w_item['price'] ) / $w_item['price'] ) * 100 )
+								);
+								?>
+							</span>
 							<?php endif; ?>
 							<?php if ( $w_item['product_object']->get_price() < $w_item['price'] ) : ?>
-							<span class="price-decrease"><?php printf( __( 'Price dropped by %s%% since added.' ), round( ( ( $w_item['price'] - $w_item['product_object']->get_price() ) / $w_item['price'] ) * 100 ) ); ?></span>
+							<span class="price-decrease">
+								<?php
+								printf(
+									/* translators: Price change in % */
+									__( 'Price dropped by %s%% since added.' ),
+									round( ( ( $w_item['price'] - $w_item['product_object']->get_price() ) / $w_item['price'] ) * 100 )
+								);
+								?>
+							</span>
 							<?php endif; ?>
 						</td>
 					<?php endif; ?>
 					<?php if ( apply_filters( 'wlffwc_shortcode_display_stock', true, $w_item ) ) : ?>
 						<td class="product-stock-status">
 							<span class="mobile-th"><?php esc_html_e( 'Stock Status', 'wishlist-feature-for-woocommerce' ); ?></span> 
-							<?php echo wc_get_stock_html( $w_item['product_object'] ); ?>
+							<?php echo wc_get_stock_html( $w_item['product_object'] ); // WPCS: XSS ok. ?>
 						</td>
 						<?php endif; ?>
 						<td class="product-actions">
 							<span class="mobile-th"><?php esc_html_e( 'Actions', 'wishlist-feature-for-woocommerce' ); ?></span>
 							<?php
+								/* translators: Date since added */
 								echo '<span class="date-added">' . sprintf( __( 'Added on: %s', 'wishlist-feature-for-woocommerce' ), date_i18n( get_option( 'date_format' ), strtotime( $w_item['added'] ) ) ) . '</span>';
 							?>
 							<?php if ( $w_item['product_object']->is_in_stock() ) : ?>
@@ -90,7 +107,7 @@ defined( 'ABSPATH' ) || exit;
 				endif;
 			?>
 			<tr class="no-data-found-row <?php echo esc_attr( $hide_no_data_row ); ?>">
-				<td colspan="<?php echo apply_filters( 'wlffwc_wishlist_colspan', 5 ); ?>"><?php echo $no_products_text; ?></td>
+				<td colspan="<?php echo esc_attr( apply_filters( 'wlffwc_wishlist_colspan', 5 ) ); ?>"><?php echo esc_html( $no_products_text ); ?></td>
 			</tr>
 		</tbody>
 	</table>

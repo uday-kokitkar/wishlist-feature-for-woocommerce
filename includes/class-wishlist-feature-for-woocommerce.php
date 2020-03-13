@@ -65,14 +65,18 @@ final class Wishlist_Feature_For_Woocommerce {
 	 * @since 1.0.0
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Cloning is forbidden.', 'wishlist-feature-for-woocommerce' ) ), '1.0.0' );
+		if ( function_exists( 'wc_doing_it_wrong' ) ) {
+			wc_doing_it_wrong( __FUNCTION__, esc_html( __( 'Cloning is forbidden.', 'wishlist-feature-for-woocommerce' ) ), '1.0.0' );
+		}
 	}
 
 	/**
 	 * Unserializing instances of this class is forbidden.
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, esc_html( __( 'Unserializing instances of this class is forbidden.', 'wishlist-feature-for-woocommerce' ) ), '1.0.0' );
+		if ( function_exists( 'wc_doing_it_wrong' ) ) {
+			wc_doing_it_wrong( __FUNCTION__, esc_html( __( 'Unserializing instances of this class is forbidden.', 'wishlist-feature-for-woocommerce' ) ), '1.0.0' );
+		}
 	}
 
 	/**
@@ -156,7 +160,7 @@ final class Wishlist_Feature_For_Woocommerce {
 			return;
 		}
 
-		/*
+		/**
 		|
 		| Classes loaded for the dashboard only.
 		|
@@ -165,14 +169,14 @@ final class Wishlist_Feature_For_Woocommerce {
 			$this->admin_init();
 		}
 
-		/*
+		/**
 		|
 		| Classes loaded for the frontend and for ajax requests.
 		|
 		 */
 		if ( $this->is_request( 'frontend' ) ) {
 
-			/*
+			/**
 			|
 			| Classes loaded for Shortcodes.
 			|
@@ -227,6 +231,7 @@ final class Wishlist_Feature_For_Woocommerce {
 				<h3>
 				<?php
 				printf(
+					/* translators: Plugin name, Minimum PHP version, Current PHP version, Plugin name */
 					__(
 						'The <strong>%1$s</strong> requires PHP version %2$s or higher. Because you are using an unsupported version of PHP (%3$s), the <strong>%4$s</strong> plugin will not initialize. Please contact your hosting company to upgrade to PHP.'
 					),
@@ -239,15 +244,15 @@ final class Wishlist_Feature_For_Woocommerce {
 				</h3>
 			</div>
 			<?php
-		} else if ( ! defined( 'WC_PLUGIN_FILE' ) ) {
+		} elseif ( ! defined( 'WC_PLUGIN_FILE' ) ) {
 			// Show notice if WooCommerce is not active.
 			?>
 			<div class="notice notice-error">
 				<p>
 				<?php
 				$install_wc_url = admin_url( 'plugin-install.php?s=woocommerce&tab=search' );
-
 				printf(
+					/* translators: plugin name, Installation URL. */
 					__(
 						'The <strong>%1$s</strong> requires WooCommerce to be activated ! <a href="%2$s">Install / Activate WooCommerce</a>'
 					),
@@ -325,8 +330,8 @@ final class Wishlist_Feature_For_Woocommerce {
 			return false;
 		}
 
-		$r_prefix               = trailingslashit( rest_get_url_prefix() );
-		$is_rest_api_request    = ( false !== strpos( $_SERVER['REQUEST_URI'], $r_prefix ) );
+		$r_prefix            = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $r_prefix ) );
 
 		return $is_rest_api_request;
 	}
